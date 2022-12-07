@@ -9,31 +9,28 @@ import {
   Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { Route, Routes } from 'react-router-dom';
+
+import Landing from './pages/Landing';
+import Login from './pages/Login';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
+      <Box
+        minH="100vh"
+        w="35.2rem"
+        minW="600px"
+        m="0 auto"
+        overflow="hidden"
+        boxSizing="border-box"
+        boxShadow="lg"
+        rounded="md"
+      >
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="login" element={<Login />} />
+        </Routes>
       </Box>
     </ChakraProvider>
   );
