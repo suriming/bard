@@ -1,13 +1,16 @@
-import { Box, Flex, Spacer, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Spacer, Text } from '@chakra-ui/react';
+import { useNavigate } from 'react-router';
 
 function Login() {
+  const navigate = useNavigate();
+  const onTmpClick = () => {
+    navigate('/collectinput');
+  };
   return (
     <>
-      {/* <Box p={2} all>
-        <Text>Login</Text>
-      </Box> */}
       <Flex align="center" justify="center">
         <Text>Login</Text>
+        <Button onClick={onTmpClick}>tmp button to input page </Button>
       </Flex>
     </>
   );
