@@ -24,12 +24,7 @@ function App() {
           //   '0 0 0 calc(50vw - 1px) auto', // 48em-62em
           //   '0 0 0 calc(50vw - 1px) auto', // 62em+
           // ]}
-          m={{
-            base: '0 auto', // 0-30em
-            md: '0 auto', // 30em-48em
-            lg: '0 0 0 calc(50vw - 1px)', // 48em-62em
-            xl: '0 0 0 calc(50vw - 1px)', // 62em+
-          }}
+          m={'0 auto'}
           // // ml="730.5px"
           // overflow="hidden"
           // // boxSizing="border-box"
@@ -38,13 +33,8 @@ function App() {
           minH="100vh"
           // w={['22.2rem', '24.2rem', '100vw', '100vw']}
           // w="20rem"
-          w={{
-            base: '24em', // 0-30em
-            md: '22rem', // 30em-48em
-            lg: '450px', // 48em-62em
-            xl: '450px', // 62em+
-          }}
-          minW="22rem"
+          w="100vw"
+          maxW="48rem"
           // m="0 auto"
           overflow="hidden"
           boxShadow="lg"
