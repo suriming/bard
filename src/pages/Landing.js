@@ -1,4 +1,4 @@
-import { Box, Button, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 
 function Landing() {
@@ -8,12 +8,34 @@ function Landing() {
   };
   return (
     <>
-      <VStack pt={2}>
-        <Box>
-          <Text fontSize="1.5rem">BARD</Text>
-        </Box>
-        <Button onClick={onStart}>Get Started</Button>
-      </VStack>
+      <Flex
+        pt="3.5rem"
+        w="100%"
+        flexDirection="column"
+        flexGrow="1"
+        flexShrink="1"
+        flexBasis="0%"
+        overflow="auto"
+      >
+        <Flex pr="1.5rem" pl="1.5rem" pb="6.25rem">
+          <Flex justify="center" align="flex-start">
+            <Text fontSize="1.5rem">BARD</Text>
+          </Flex>
+        </Flex>
+        <Flex
+          position="fixed"
+          w="100%"
+          maxW="48rem"
+          bottom="0rem"
+          flexDirection="row"
+          boxSizing="border-box"
+          justify="center"
+          m="0 auto"
+          p="1.5rem"
+        >
+          <Button onClick={onStart}>Get Started</Button>
+        </Flex>
+      </Flex>
     </>
   );
 }
