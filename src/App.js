@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import CollectInput from './pages/CollectInput';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="login" element={<Login />} />
+            <Route path="home" element={<Home />} />
             <Route path="collectinput" element={<CollectInput />} />
           </Routes>
         </Box>
