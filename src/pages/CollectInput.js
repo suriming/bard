@@ -1,5 +1,6 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { Box, Text, VStack, Flex, Button, Icon } from '@chakra-ui/react';
+import CharacterInput from '../components/CharacterInput';
 import PhotoInput from '../components/PhotoInput';
 
 function CollectInput() {
@@ -30,6 +31,7 @@ function CollectInput() {
           <Flex justify="center" align="flex-start">
             <Text>Input</Text>
             <PhotoInput />
+            <CharacterInput />
           </Flex>
         </Flex>
         <Flex
