@@ -28,9 +28,10 @@ function CollectInput() {
           </Flex>
         </Box>
         <Flex pr="1.5rem" pl="1.5rem" pb="6.25rem">
-          <Flex justify="center" align="flex-start">
+          <Flex justify="center" align="flex-start" direction="column">
             <Text>Input</Text>
             <PhotoInput />
+            <Text>캐릭터 선택</Text>
             <CharacterInput />
           </Flex>
         </Flex>
