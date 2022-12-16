@@ -30,7 +30,7 @@ function CharacterInput() {
 
   return (
     <>
-      <Flex justify="center" align="center">
+      <Flex flexDirection="column" justify="center" align="center">
         <Flex w="500px" flexWrap="wrap" align="center" gap="1.8">
           {tags.map((tag, index) => {
             return (

@@ -1,13 +1,14 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { Box, Text, VStack, Flex, Button, Icon } from '@chakra-ui/react';
 import CharacterInput from '../components/CharacterInput';
+import Header from '../components/Header';
 import PhotoInput from '../components/PhotoInput';
 
 function CollectInput() {
   return (
     <>
       <Flex
-        pt="3.5rem"
+        // pt="3.5rem"
         w="100%"
         flexDirection="column"
         flexGrow="1"
@@ -15,38 +16,33 @@ function CollectInput() {
         flexBasis="0%"
         overflow="auto"
       >
-        <Box height="3.5rem" position="fixed" top="0px" w="100%" maxW="48rem">
+        <Header title="BARD" />
+        <Flex
+          flexDirection="column"
+          justify="space-between"
+          alignItems="flex-start"
+          p="60px 24px 40px"
+        >
           <Flex
-            height="100%"
-            align="center"
-            justify="flex-start"
-            boxSizing="inherit"
+            flexDirection="column"
+            align="flex-start"
+            padding="0px"
+            gap="32px"
           >
-            <Box p="0px 1rem">
-              <ChevronLeftIcon boxSize={8} />
-            </Box>
-          </Flex>
-        </Box>
-        <Flex pr="1.5rem" pl="1.5rem" pb="6.25rem">
-          <Flex justify="center" align="flex-start" direction="column">
             <Text>Input</Text>
             <PhotoInput />
             <Text>캐릭터 선택</Text>
             <CharacterInput />
           </Flex>
-        </Flex>
-        <Flex
-          position="fixed"
-          w="100%"
-          maxW="48rem"
-          bottom="0rem"
-          flexDirection="row"
-          boxSizing="border-box"
-          justify="center"
-          m="0 auto"
-          p="1.5rem"
-        >
-          <Button w="100%">다음으로</Button>
+          <Button
+            colorScheme="yellow"
+            w="calc(100vw - 48px)"
+            maxW="calc(768px - 48px)"
+            bottom="40px"
+            position="fixed"
+          >
+            다음으로
+          </Button>
         </Flex>
       </Flex>
     </>
