@@ -1,7 +1,12 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
+import { useNavigate } from 'react-router';
 import Header from '../components/Header';
 
 function Home() {
+  const navigate = useNavigate();
+  const onStartCreateStory = () => {
+    navigate('/collectinput');
+  };
   return (
     <>
       <Flex
@@ -27,8 +32,9 @@ function Home() {
             maxW="calc(768px - 48px)"
             bottom="40px"
             position="fixed"
+            onClick={onStartCreateStory}
           >
-            다음으로
+            스토리 만들기
           </Button>
         </Flex>
       </Flex>

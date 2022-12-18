@@ -6,6 +6,8 @@ import Landing from './pages/Landing';
 import Login from './pages/Login';
 import CollectInput from './pages/CollectInput';
 import Home from './pages/Home';
+import SignUpPolicy from './pages/SignUpPolicy';
+import StoryLoading from './pages/StoryLoading';
 
 function App() {
   return (
@@ -17,14 +19,16 @@ function App() {
           w="100vw" // 어플리케이션 영역 너비를 뷰포트 너비로 설정
           maxW="48rem" // 어플리케이션 영역 너비가 48rem(768px)을 넘지 않도록 설정
           overflow="hidden"
-          boxShadow="lg"
+          boxShadow="md"
           rounded="md"
         >
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="login" element={<Login />} />
+            <Route path="signuppolicy" element={<SignUpPolicy />} />
             <Route path="home" element={<Home />} />
             <Route path="collectinput" element={<CollectInput />} />
+            <Route path="storyloading" element={<StoryLoading />} />
           </Routes>
         </Box>
       </Box>
