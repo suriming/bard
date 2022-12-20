@@ -1,5 +1,6 @@
 import { Button, Checkbox, Divider, Flex, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
 import Header from '../components/Header';
 
@@ -7,6 +8,11 @@ function SignUpPolicy() {
   const [checkedItems, setCheckedItems] = useState([false, false]);
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate('/signupname');
+  };
   return (
     <>
       <Flex
@@ -17,7 +23,7 @@ function SignUpPolicy() {
         flexBasis="0%"
         overflow="auto"
       >
-        <Header title="Sign up" />
+        <Header title="Sign up" isBack />
         <Flex
           flexDirection="column"
           justifyContent="space-between"

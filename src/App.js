@@ -8,6 +8,9 @@ import CollectInput from './pages/CollectInput';
 import Home from './pages/Home';
 import SignUpPolicy from './pages/SignUpPolicy';
 import StoryLoading from './pages/StoryLoading';
+import LoadingComplete from './pages/LoadingComplete';
+import StoryView from './pages/StoryView';
+import SignUpName from './pages/SignUpName';
 
 function App() {
   return (
@@ -26,9 +29,12 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="login" element={<Login />} />
             <Route path="signuppolicy" element={<SignUpPolicy />} />
+            <Route path="signupname" element={<SignUpName />} />
             <Route path="home" element={<Home />} />
             <Route path="collectinput" element={<CollectInput />} />
             <Route path="storyloading" element={<StoryLoading />} />
+            <Route path="loadingcomplete" element={<LoadingComplete />} />
+            <Route path="storyview" element={<StoryView />} />
           </Routes>
         </Box>
       </Box>

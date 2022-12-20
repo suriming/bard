@@ -23,7 +23,7 @@ function Home() {
           <Flex justify="center" align="flex-start">
             <Text fontSize="4xl">Sulim's Stories</Text>
           </Flex>
-          <Flex justify="center" align="flex-start">
+          <Flex flexDirection="column" align="flex-start">
             Recent Stories
           </Flex>
           <Button

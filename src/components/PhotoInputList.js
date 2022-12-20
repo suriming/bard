@@ -13,7 +13,9 @@ function PhotoInputList({ imageURLs }) {
         overflowX="scroll"
       >
         {imageURLs &&
-          imageURLs.map(imageSrc => <PhotoInputItem imageSrc={imageSrc} />)}
+          imageURLs.map((imageSrc, index) => (
+            <PhotoInputItem key={index} imageSrc={imageSrc} />
+          ))}
       </Flex>
     </>
   );

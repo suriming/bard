@@ -1,9 +1,9 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
 import Header from '../components/Header';
 
-function StoryLoading() {
+function LoadingComplete() {
   const navigate = useNavigate();
   const onClick = () => {
     navigate('/storyview');
@@ -19,12 +19,10 @@ function StoryLoading() {
         overflow="auto"
       >
         <Header title="스토리 만들기" isBack />
-        <Flex flexDirection="column" alignItems="flex-start" p="40px 24px 10px">
-          <BottomButton onClick={onClick} title="보러가기" />
-        </Flex>
+        <BottomButton title="보러 가기" onClick={onClick} />
       </Flex>
     </>
   );
 }
 
-export default StoryLoading;
+export default LoadingComplete;

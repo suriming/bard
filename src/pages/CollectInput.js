@@ -13,6 +13,7 @@ import {
   TagCloseButton,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
 import PhotoInputList from '../components/PhotoInputList';
@@ -25,6 +26,21 @@ function CollectInput() {
 
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
+
+  const { register, control, handleSubmit, reset, watch } = useForm({
+    defaultValues: {
+      cTag: [{ content: 'Bill' }],
+    },
+  });
+  const { fields, append, prepend, remove, swap, move, insert, replace } =
+    useFieldArray({
+      control, // control props comes from useForm (optional: if you are using FormContext)
+      name: 'cTag', // unique name for your Field Array
+    });
+
+  const onSubmit = async data => {
+    console.log(data);
+  };
 
   useEffect(() => {
     if (images.length < 1) {
@@ -39,22 +55,48 @@ function CollectInput() {
     setImages([...e.target.files]);
   };
 
-  const [tags, setTags] = useState([]);
+  // const handleKeyDown = e => {
+  //   if (e.target.value.length !== 0 && e.key === 'Enter') {
+  //     // (async () => {
 
-  const handleKeyDown = e => {
-    if (e.target.value.length !== 0 && e.key === 'Enter') {
-      console.log(tags);
-      const value = e.target.value;
-      if (!value.trim()) {
-        return;
-      }
-      setTags([...tags, value]);
-      e.target.value = '';
-    }
+  //     // })
+  //     console.log(tags);
+  //     // console.log(tags);
+  //     const value = e.target.value;
+  //     console.log(value);
+  //     console.log(tagItem);
+  //     if (!value.trim()) {
+  //       return;
+  //     }
+
+  //     let newTags = [...tags];
+  //     newTags.push(tagItem);
+  //     console.log(newTags);
+  //     setTags([...tags, tagItem]);
+  //     // setTags([...tags, value]);
+  //     // e.target.value = '';
+  //     setTagItem('');
+  //   }
+  // };
+
+  const [cusTags, setCusTags] = useState(['띠용', '뭐임']);
+  const [tagItem, setTagItem] = useState('댇체');
+
+  const addTag = () => {
+    console.log(tagItem);
+    (async () => {
+      setCusTags([...cusTags, tagItem]);
+    })().then(() => {
+      setTagItem('');
+      console.log(cusTags);
+    });
+    // setTags([...tags, tagItem]);
+    setTagItem('');
+    console.log(cusTags);
   };
 
   const removeTag = idx => {
-    setTags(tags.filter((item, i) => i !== idx));
+    setCusTags(cusTags.filter((item, i) => i !== idx));
   };
 
   return (
@@ -95,38 +137,56 @@ function CollectInput() {
               <PhotoInputList imageURLs={imageURLs} />
             </Box>
             <Text>캐릭터 선택</Text>
-            <Input
+            {/* <Input
               flexGrow="1"
               type="text"
               placeholder="캐릭터를 입력하세요..."
-              onKeyDown={handleKeyDown}
+              onChange={e => setTagItem(e.target.value)}
+              // onKeyDown={handleKeyDown}
+              value={tagItem}
               // outline="none"
               // border="none"
               cursor="text"
             />
+            <Button onClick={addTag}>제발</Button>
             <Flex flexDirection="column" justify="center" align="center">
               <Flex w="500px" flexWrap="wrap" align="center" gap="1.8">
-                {tags.map((tag, index) => {
-                  console.log(index);
-                  return (
-                    <Stack direction="row">
+                <Stack direction="row">
+                  {cusTags &&
+                    cusTags.map((custag, index) => (
                       <Tag key={index}>
-                        <TagLabel>{tag}</TagLabel>
+                        <TagLabel>{custag}</TagLabel>
+                        <TagCloseButton onClick={removeTag(index)} />
                       </Tag>
-                      <TagCloseButton onClick={removeTag(index)} />
-                      {/* <Text>{tag}</Text> */}
-                      {/* <Button
-                        size="xs"
-                        colorScheme="blackAlpha"
-                        borderRadius="50%"
-                        onClick={() => removeTag(index)}
-                      >
-                        x
-                      </Button> */}
-                    </Stack>
-                  );
-                })}
+                    ))}
+                </Stack>
               </Flex>
+            </Flex> */}
+            <Flex>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <ul>
+                  {fields.map((field, index) => {
+                    return (
+                      <Tag key={field.id}>
+                        <Input
+                          {...register(`cTag.${index}.content`, {
+                            required: true,
+                          })}
+                        />
+                        <TagCloseButton onClick={() => remove(index)} />
+                        <Controller
+                          render={({ field }) => <input {...field} />}
+                          name={`cTag.${index}.content`}
+                          control={control}
+                        />
+                      </Tag>
+                    );
+                  })}
+                  <Button onClick={() => append({ content: '' })}>
+                    append
+                  </Button>
+                </ul>
+              </form>
             </Flex>
           </Flex>
           <Button
