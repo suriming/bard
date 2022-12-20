@@ -26,6 +26,17 @@ function CollectInput() {
 
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
+  const [value, setValue] = useState('');
+  const [values, setValues] = useState([]);
+
+  const handleChange = event => {
+    setValue(event.target.value);
+  };
+
+  const onCheck = e => {
+    setValue('');
+    setValues([...values, value]);
+  };
 
   const { register, control, handleSubmit, reset, watch } = useForm({
     defaultValues: {
@@ -99,7 +110,7 @@ function CollectInput() {
     setCusTags(cusTags.filter((item, i) => i !== idx));
   };
 
-  const imageInputSquare = () => {
+  const imageInputSquare = (
     <Input
       type="file"
       h="80px"
@@ -107,8 +118,8 @@ function CollectInput() {
       multiple
       accept="image/*"
       onChange={onChangeImages}
-    />;
-  };
+    />
+  );
 
   return (
     <>
@@ -137,7 +148,12 @@ function CollectInput() {
           >
             <Text>이미지 업로드: 3장 ~ 5장 </Text>
             <Box>
-              <Input
+              {images ? (
+                imageInputSquare
+              ) : (
+                <PhotoInputList imageURLs={imageURLs} />
+              )}
+              {/* <Input
                 type="file"
                 h="100%"
                 w="100%"
@@ -145,9 +161,8 @@ function CollectInput() {
                 accept="image/*"
                 onChange={onChangeImages}
               />
-              <PhotoInputList imageURLs={imageURLs} />
+              <PhotoInputList imageURLs={imageURLs} /> */}
             </Box>
-            <Text>캐릭터 선택</Text>
             {/* <Input
               flexGrow="1"
               type="text"
@@ -173,8 +188,32 @@ function CollectInput() {
                 </Stack>
               </Flex>
             </Flex> */}
-            <Flex>
-              <form onSubmit={handleSubmit(onSubmit)}>
+            <Flex flexDirection="column" gap="5px">
+              <Text>캐릭터 입력</Text>
+              <Flex flexDirection="row" gap="8px">
+                <Input
+                  value={value}
+                  onChange={handleChange}
+                  placeholder="캐릭터를 입력하세요. ex: 서혁준"
+                />
+                <Button onClick={onCheck}>체크</Button>
+              </Flex>
+              <Box
+                w="calc(100vw - 48px)"
+                maxW="calc(768px - 48px)"
+                minH="100px"
+                background="gray.100"
+              >
+                {values.map((item, index) => {
+                  return (
+                    <Tag key={index}>
+                      <TagLabel>{item}</TagLabel>
+                      <TagCloseButton />
+                    </Tag>
+                  );
+                })}
+              </Box>
+              {/* <form onSubmit={handleSubmit(onSubmit)}>
                 <ul>
                   {fields.map((field, index) => {
                     return (
@@ -197,7 +236,7 @@ function CollectInput() {
                     append
                   </Button>
                 </ul>
-              </form>
+              </form> */}
             </Flex>
           </Flex>
           <Button
