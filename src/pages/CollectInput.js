@@ -99,6 +99,17 @@ function CollectInput() {
     setCusTags(cusTags.filter((item, i) => i !== idx));
   };
 
+  const imageInputSquare = () => {
+    <Input
+      type="file"
+      h="80px"
+      w="80px"
+      multiple
+      accept="image/*"
+      onChange={onChangeImages}
+    />;
+  };
+
   return (
     <>
       <Flex
@@ -124,7 +135,7 @@ function CollectInput() {
             w="calc(100vw - 48px)"
             maxW="calc(768px - 48px)"
           >
-            <Text>이미지 업로드</Text>
+            <Text>이미지 업로드: 3장 ~ 5장 </Text>
             <Box>
               <Input
                 type="file"
