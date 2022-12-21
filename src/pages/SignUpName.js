@@ -17,7 +17,14 @@ function SignUpName() {
         overflow="auto"
       >
         <Header title="Sign Up" />
-        <BottomButton />
+        <Flex
+          flexDirection="column"
+          justifyContent="space-between"
+          align="center"
+          p="60px 24px"
+        >
+          <BottomButton title="Submit" />
+        </Flex>
       </Flex>
     </>
   );

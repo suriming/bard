@@ -67,7 +67,7 @@ function SignUpPolicy() {
               </Checkbox>
             </Stack>
           </Flex>
-          <BottomButton title="submit" />
+          <BottomButton title="submit" onClick={onClick} />
         </Flex>
       </Flex>
     </>

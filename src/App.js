@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Box, theme } from '@chakra-ui/react';
+import { ChakraProvider, Box, theme, extendTheme } from '@chakra-ui/react';
 import { Route, Routes } from 'react-router-dom';
 
 import Landing from './pages/Landing';
@@ -11,10 +11,19 @@ import StoryLoading from './pages/StoryLoading';
 import LoadingComplete from './pages/LoadingComplete';
 import StoryView from './pages/StoryView';
 import SignUpName from './pages/SignUpName';
+import paperBackground from '../src/assets/SmoothNotebookPaper.PNG';
+
+const customTheme = extendTheme({
+  colors: {
+    yellow: {
+      400: '#F7DE84', // Override the default yellow color (500) with red
+    },
+  },
+});
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={customTheme}>
       <Box boxSizing="border-box">
         <Box
           m={'0 auto'} // 어플리케이션 영역을 중앙에 위치시킴
@@ -24,6 +33,8 @@ function App() {
           overflow="hidden"
           boxShadow="md"
           rounded="md"
+          backgroundImage={paperBackground}
+          filter="brightness(108%)"
         >
           <Routes>
             <Route path="/" element={<Landing />} />

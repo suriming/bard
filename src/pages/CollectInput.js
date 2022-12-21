@@ -12,7 +12,7 @@ import {
   Tag,
   TagCloseButton,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
@@ -28,6 +28,7 @@ function CollectInput() {
   const [imageURLs, setImageURLs] = useState([]);
   const [value, setValue] = useState('');
   const [values, setValues] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const handleChange = event => {
     setValue(event.target.value);
@@ -66,30 +67,6 @@ function CollectInput() {
     setImages([...e.target.files]);
   };
 
-  // const handleKeyDown = e => {
-  //   if (e.target.value.length !== 0 && e.key === 'Enter') {
-  //     // (async () => {
-
-  //     // })
-  //     console.log(tags);
-  //     // console.log(tags);
-  //     const value = e.target.value;
-  //     console.log(value);
-  //     console.log(tagItem);
-  //     if (!value.trim()) {
-  //       return;
-  //     }
-
-  //     let newTags = [...tags];
-  //     newTags.push(tagItem);
-  //     console.log(newTags);
-  //     setTags([...tags, tagItem]);
-  //     // setTags([...tags, value]);
-  //     // e.target.value = '';
-  //     setTagItem('');
-  //   }
-  // };
-
   const [cusTags, setCusTags] = useState(['띠용', '뭐임']);
   const [tagItem, setTagItem] = useState('댇체');
 
@@ -107,7 +84,8 @@ function CollectInput() {
   };
 
   const removeTag = idx => {
-    setCusTags(cusTags.filter((item, i) => i !== idx));
+    // setCusTags(cusTags.filter((item, i) => i !== idx));
+    setValues(values.filter((item, i) => i !== idx));
   };
 
   const imageInputSquare = (
@@ -117,12 +95,27 @@ function CollectInput() {
       w="80px"
       multiple
       accept="image/*"
-      onChange={onChangeImages}
+      onChange={e => {
+        onChangeImages();
+        setClicked(false);
+      }}
     />
   );
 
+  const onClickInputSquare = e => {
+    console.log(e);
+    setClicked(true);
+  };
+
+  const inputRef = useRef();
+
+  const handleClick = () => {
+    inputRef.current.click();
+  };
+
   return (
     <>
+      <input type="file" hidden ref={inputRef} />
       <Flex
         w="100%"
         flexDirection="column"
@@ -147,13 +140,29 @@ function CollectInput() {
             maxW="calc(768px - 48px)"
           >
             <Text>이미지 업로드: 3장 ~ 5장 </Text>
-            <Box>
-              {images ? (
+            <Flex
+              flexDirection="row"
+              align="flex-start"
+              p="0px 0px 7px"
+              gap="8px"
+              h="82px"
+            >
+              <Button
+                h="80px"
+                w="80px"
+                colorScheme="yellow"
+                onClick={handleClick}
+              >
+                {/* {clicked?im} */}
+              </Button>
+            </Flex>
+
+            {/* {images ? (
                 imageInputSquare
               ) : (
                 <PhotoInputList imageURLs={imageURLs} />
-              )}
-              {/* <Input
+              )} */}
+            {/* <Input
                 type="file"
                 h="100%"
                 w="100%"
@@ -162,7 +171,7 @@ function CollectInput() {
                 onChange={onChangeImages}
               />
               <PhotoInputList imageURLs={imageURLs} /> */}
-            </Box>
+            {/* </Box> */}
             {/* <Input
               flexGrow="1"
               type="text"
@@ -188,6 +197,23 @@ function CollectInput() {
                 </Stack>
               </Flex>
             </Flex> */}
+            {/* <Box
+              borderColor="gray.300"
+              borderStyle="dashed"
+              borderWidth="2px"
+              rounded="md"
+              shadow="sm"
+              role="group"
+              transition="all 150ms ease-in-out"
+              _hover={{
+                shadow: 'md',
+              }}
+              initial="rest"
+              animate="rest"
+              whileHover="hover"
+            >
+              ???
+            </Box> */}
             <Flex flexDirection="column" gap="5px">
               <Text>캐릭터 입력</Text>
               <Flex flexDirection="row" gap="8px">
@@ -203,15 +229,19 @@ function CollectInput() {
                 maxW="calc(768px - 48px)"
                 minH="100px"
                 background="gray.100"
+                p="10px"
               >
-                {values.map((item, index) => {
-                  return (
-                    <Tag key={index}>
-                      <TagLabel>{item}</TagLabel>
-                      <TagCloseButton />
-                    </Tag>
-                  );
-                })}
+                {values.map((item, index) => (
+                  <Tag
+                    key={index}
+                    colorScheme="blackAlpha"
+                    variant="subtle"
+                    m="0.2rem"
+                  >
+                    <TagLabel c>{item}</TagLabel>
+                    <TagCloseButton onClick={() => removeTag(index)} />
+                  </Tag>
+                ))}
               </Box>
               {/* <form onSubmit={handleSubmit(onSubmit)}>
                 <ul>
