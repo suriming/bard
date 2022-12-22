@@ -40,6 +40,10 @@ function CollectInput() {
       emoji: '🦌',
       name: '루돌프',
     },
+    {
+      emoji: '🐶',
+      name: '강아지',
+    },
   ];
 
   const onClickSuggestedCharacter = name => {
@@ -246,7 +250,7 @@ function CollectInput() {
                     variant="subtle"
                     m="0.2rem"
                   >
-                    <TagLabel c>{item}</TagLabel>
+                    <TagLabel>{item}</TagLabel>
                     <TagCloseButton onClick={() => removeTag(index)} />
                   </Tag>
                 ))}

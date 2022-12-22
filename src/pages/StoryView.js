@@ -52,7 +52,7 @@ function StoryView() {
   const appearSentencesOnScroll = () => {
     sentenceRefs &&
       sentenceRefs.current.forEach(l => {
-        console.log(l);
+        // console.log(l);
         const p = l.getBoundingClientRect();
         const pTop = p.top;
         const pHeight = p.height;
@@ -70,11 +70,13 @@ function StoryView() {
     setSentences(
       mock.story.body
         // .replace(/\n/g, ' ')
-        .split(/(".*?")\s|(?<=\.|\?)\s/)
+        .split(/(".*?")\s|(\.|\?)\s/)
+        // .split(/(".*?")\s|\.\s|\?\s/)
         .filter(Boolean)
     );
     setImageoutput(mock.story.image_url);
-  }, []);
+    console.log(sentences);
+  }, [imageoutput]);
 
   useEffect(() => {
     window.addEventListener('scroll', appearSentencesOnScroll);
