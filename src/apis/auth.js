@@ -1,27 +1,45 @@
-export const googleSignIn = async ({ clientId, credential }) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/auth/google`, {
-    method: 'POST',
-    body: JSON.stringify({ clientId, credential }),
-    credentials: 'include',
-  });
+import axios from 'axios';
 
-  if (res.ok) {
+const API_URL = process.env.REACT_APP_API_URL;
+
+export const googleSignIn = async ({ clientId, credential }) => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/auth/google`,
+      {
+        clientId,
+        credential,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
     return res;
-  } else {
-    throw new Error('Failed to sign in');
+  } catch (e) {
+    console.log(e);
   }
 };
 
-export const Logout = async () => {
-  const res = await fetch('http://localhost:8080/api/v1/auth/logout', {
-    method: 'GET',
-    credentials: 'include',
-  });
-  if (res.ok) {
-    const response = await res.json();
-    console.log(response);
-    return response;
-  } else {
-    throw new Error('Failed to authenticate');
+export const logout = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/auth/logout`, {
+      withCredentials: true,
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getSession = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/auth/user`, {
+      withCredentials: true,
+    });
+
+    return res;
+  } catch (e) {
+    console.log(e);
   }
 };
