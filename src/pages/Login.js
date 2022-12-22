@@ -2,9 +2,23 @@ import { Box, Button, Flex, Image, Link, Spacer, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
 import ViolinIcon from '../assets/violin.png';
+import { GoogleLogin } from '@react-oauth/google';
+import { googleSignIn } from '../apis/auth';
 
 function Login() {
   const navigate = useNavigate();
+  
+  const onSuccess = async res => {
+    try {
+      const response = await googleSignIn(res);
+      if (response.status === 201) navigate('/collectinput');
+      else navigate('/signup');
+    } catch (e) {
+      console.log(e);
+      alert(e);
+    }
+  };
+  
   const onClickSignUp = () => {
     navigate('/signuppolicy');
   };
@@ -34,6 +48,7 @@ function Login() {
         >
           <Text fontSize="3xl">Login to Bard</Text>
           <Image boxSize="80px" src={ViolinIcon} />
+          <GoogleLogin onSuccess={onSuccess} onError={res => console.log(res)} />
           <Text>
             New to BARD?&nbsp;
             <Link onClick={onClickSignUp} color="yellow.500">
