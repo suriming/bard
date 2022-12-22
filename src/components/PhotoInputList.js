@@ -1,7 +1,8 @@
 import { Box, Flex, UnorderedList } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import PhotoInputItem from './PhotoInputItem';
 
-function PhotoInputList({ imageURLs }) {
+function ImagePreviews({ previews, loadingImages }) {
   return (
     <>
       <Flex
@@ -12,13 +13,12 @@ function PhotoInputList({ imageURLs }) {
         h="80px"
         overflowX="scroll"
       >
-        {imageURLs &&
-          imageURLs.map((imageSrc, index) => (
-            <PhotoInputItem key={index} imageSrc={imageSrc} />
-          ))}
+        {previews.map((imageSrc, index) => (
+          <PhotoInputItem key={index} imageSrc={imageSrc} />
+        ))}
       </Flex>
     </>
   );
 }
 
-export default PhotoInputList;
+export default ImagePreviews;

@@ -34,9 +34,7 @@ const Suggestions = [
   },
 ];
 
-const CharacterInput = () => {
-  const [characters, setCharacters] = useState([]);
-
+const CharacterInput = ({ characters, setCharacters }) => {
   const [name, setName] = useState('');
 
   const onNameSubmit = () => {
