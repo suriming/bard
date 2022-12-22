@@ -10,7 +10,7 @@ function Home() {
   const mock = [
     {
       title: '네이마르와 영주 1편',
-      createdAt: '2022-05-30T09:25:59',
+      createdAt: '2022-12-21T22:42:29.544+09:00',
       img: MockImage1,
     },
     {

@@ -1,9 +1,16 @@
-import { Box, Img, ListItem } from '@chakra-ui/react';
+import { Box, Image, Img, ListItem } from '@chakra-ui/react';
 
 function PhotoInputItem({ imageSrc }) {
   return (
     <>
-      <Img borderRadius="5px" h="80px" src={imageSrc} />
+      {/* <Box h="80px" w="80px" backgroundImage={imageSrc}></Box> */}
+      <Image
+        borderRadius="5px"
+        h="80px"
+        w="80px"
+        objectFit="cover"
+        src={imageSrc}
+      />
     </>
   );
 }

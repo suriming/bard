@@ -1,13 +1,11 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { AddIcon, CheckIcon } from '@chakra-ui/icons';
 import {
   Box,
   Text,
-  VStack,
   Flex,
   Button,
   Icon,
   Input,
-  Stack,
   TagLabel,
   Tag,
   TagCloseButton,
@@ -15,6 +13,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import BottomButton from '../components/BottomButton';
 import Header from '../components/Header';
 import PhotoInputList from '../components/PhotoInputList';
 
@@ -29,6 +28,16 @@ function CollectInput() {
   const [value, setValue] = useState('');
   const [values, setValues] = useState([]);
   const [clicked, setClicked] = useState(false);
+  const mock = [
+    {
+      emoji: '네이마르와 영주 1편',
+      name: '2022-05-30T09:25:59',
+    },
+    {
+      title: '네이마르와 영주 2편',
+      createdAt: '2022-11-30T09:25:59',
+    },
+  ];
 
   const handleChange = event => {
     setValue(event.target.value);
@@ -115,7 +124,14 @@ function CollectInput() {
 
   return (
     <>
-      <input type="file" hidden ref={inputRef} />
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        hidden
+        ref={inputRef}
+        onChange={onChangeImages}
+      />
       <Flex
         w="100%"
         flexDirection="column"
@@ -139,29 +155,29 @@ function CollectInput() {
             w="calc(100vw - 48px)"
             maxW="calc(768px - 48px)"
           >
-            <Text>이미지 업로드: 3장 ~ 5장 </Text>
-            <Flex
-              flexDirection="row"
-              align="flex-start"
-              p="0px 0px 7px"
-              gap="8px"
-              h="82px"
-            >
-              <Button
-                h="80px"
-                w="80px"
-                colorScheme="yellow"
-                onClick={handleClick}
+            <Flex flexDirection="column" gap="5px">
+              <Text>이미지 업로드</Text>
+              <Text color="red.500" fontSize="xs">
+                최소 3장에서 최대 5장의 이미지를 업로드 해주세요.
+              </Text>
+              <Flex
+                flexDirection="row"
+                align="flex-start"
+                p="0px 0px 7px"
+                gap="8px"
+                h="82px"
               >
-                {/* {clicked?im} */}
-              </Button>
-            </Flex>
-
-            {/* {images ? (
-                imageInputSquare
-              ) : (
+                <Button
+                  h="80px"
+                  w="80px"
+                  colorScheme="yellow"
+                  onClick={handleClick}
+                >
+                  <AddIcon />
+                </Button>
                 <PhotoInputList imageURLs={imageURLs} />
-              )} */}
+              </Flex>
+            </Flex>
             {/* <Input
                 type="file"
                 h="100%"
@@ -172,49 +188,19 @@ function CollectInput() {
               />
               <PhotoInputList imageURLs={imageURLs} /> */}
             {/* </Box> */}
-            {/* <Input
-              flexGrow="1"
-              type="text"
-              placeholder="캐릭터를 입력하세요..."
-              onChange={e => setTagItem(e.target.value)}
-              // onKeyDown={handleKeyDown}
-              value={tagItem}
-              // outline="none"
-              // border="none"
-              cursor="text"
-            />
-            <Button onClick={addTag}>제발</Button>
-            <Flex flexDirection="column" justify="center" align="center">
-              <Flex w="500px" flexWrap="wrap" align="center" gap="1.8">
-                <Stack direction="row">
-                  {cusTags &&
-                    cusTags.map((custag, index) => (
-                      <Tag key={index}>
-                        <TagLabel>{custag}</TagLabel>
-                        <TagCloseButton onClick={removeTag(index)} />
-                      </Tag>
-                    ))}
-                </Stack>
+            <Flex flexDirection="column" gap="20px">
+              <Flex flexDirection="column" align="flex-start" gap="5px">
+                <Text>BARD의 캐릭터 제안</Text>
+                <Flex
+                  minH="48px"
+                  w="calc(100vw - 48px)"
+                  maxW="calc(768px - 48px)"
+                  border="0.7px solid"
+                  borderRadius="5px"
+                >
+                  <Flex></Flex>
+                </Flex>
               </Flex>
-            </Flex> */}
-            {/* <Box
-              borderColor="gray.300"
-              borderStyle="dashed"
-              borderWidth="2px"
-              rounded="md"
-              shadow="sm"
-              role="group"
-              transition="all 150ms ease-in-out"
-              _hover={{
-                shadow: 'md',
-              }}
-              initial="rest"
-              animate="rest"
-              whileHover="hover"
-            >
-              ???
-            </Box> */}
-            <Flex flexDirection="column" gap="5px">
               <Text>캐릭터 입력</Text>
               <Flex flexDirection="row" gap="8px">
                 <Input
@@ -222,7 +208,9 @@ function CollectInput() {
                   onChange={handleChange}
                   placeholder="캐릭터를 입력하세요. ex: 서혁준"
                 />
-                <Button onClick={onCheck}>체크</Button>
+                <Button colorScheme="yellow" onClick={onCheck}>
+                  <CheckIcon />
+                </Button>
               </Flex>
               <Box
                 w="calc(100vw - 48px)"
@@ -269,16 +257,7 @@ function CollectInput() {
               </form> */}
             </Flex>
           </Flex>
-          <Button
-            colorScheme="yellow"
-            w="calc(100vw - 48px)"
-            maxW="calc(768px - 48px)"
-            bottom="40px"
-            position="fixed"
-            onClick={onComplete}
-          >
-            입력 완료
-          </Button>
+          <BottomButton title="입력 완료" onClick={onComplete} />
         </Flex>
       </Flex>
     </>

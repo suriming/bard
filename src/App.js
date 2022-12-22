@@ -11,7 +11,7 @@ import StoryLoading from './pages/StoryLoading';
 import LoadingComplete from './pages/LoadingComplete';
 import StoryView from './pages/StoryView';
 import SignUpName from './pages/SignUpName';
-import paperBackground from '../src/assets/SmoothNotebookPaper.PNG';
+import paperBackground from '../src/assets/SmoothNotebookPaper_exposed3.png';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const customTheme = extendTheme({
@@ -36,7 +36,7 @@ function App() {
             boxShadow="md"
             rounded="md"
             backgroundImage={paperBackground}
-            filter="brightness(108%)"
+            // filter="brightness(108%)"
           >
             <Routes>
               <Route path="/" element={<Landing />} />

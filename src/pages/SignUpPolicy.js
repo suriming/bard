@@ -39,6 +39,7 @@ function SignUpPolicy() {
             maxW="calc(768px - 48px)"
           >
             <Checkbox
+              colorScheme="yellow"
               isChecked={allChecked}
               isIndeterminate={isIndeterminate}
               onChange={e =>
@@ -50,6 +51,8 @@ function SignUpPolicy() {
             <Divider />
             <Stack spacing={1}>
               <Checkbox
+                iconColor="blue.400"
+                colorScheme="yellow"
                 isChecked={checkedItems[0]}
                 onChange={e =>
                   setCheckedItems([e.target.checked, checkedItems[1]])
@@ -58,6 +61,7 @@ function SignUpPolicy() {
                 I agree to terms of service
               </Checkbox>
               <Checkbox
+                colorScheme="yellow"
                 isChecked={checkedItems[1]}
                 onChange={e =>
                   setCheckedItems([checkedItems[0], e.target.checked])
