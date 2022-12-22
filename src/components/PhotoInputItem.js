@@ -3,9 +3,7 @@ import { Box, Img, ListItem } from '@chakra-ui/react';
 function PhotoInputItem({ imageSrc }) {
   return (
     <>
-      <Box>
-        <Img src={imageSrc} />
-      </Box>
+      <Img borderRadius="5px" h="80px" src={imageSrc} />
     </>
   );
 }
