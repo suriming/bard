@@ -34,8 +34,7 @@ function StoryForm() {
     setIsLoading(true);
     const res = await createStory({
       characters: characters,
-      // TODO : replace with imageIds
-      image_ids: [23, 24, 25],
+      image_ids: imageIds,
     });
 
     console.log(res);

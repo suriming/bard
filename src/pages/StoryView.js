@@ -15,7 +15,7 @@ import { ArrowRightIcon } from '@chakra-ui/icons';
 import flowersDividerSvg from '../assets/flowersDivider.svg';
 import useAppearSentencesOnScroll from '../hooks/useAppearSentencesOnScroll';
 import { getStoryById, updateStoryTitle } from '../apis/story';
-import { useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 
 function StoryView() {
   const [sentences, setSentences] = useState([]);
@@ -24,6 +24,7 @@ function StoryView() {
   const { sentenceRefs } = useAppearSentencesOnScroll();
 
   const { storyId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -48,7 +49,8 @@ function StoryView() {
     setTitle('');
     const res = await updateStoryTitle(storyId, title);
     if (res.status === 201) {
-      alert('제목이 변경되었습니다.');
+      alert('제목이 저장되었습니다.');
+      navigate('/home');
     } else {
       alert('제목 변경에 실패했습니다.');
     }

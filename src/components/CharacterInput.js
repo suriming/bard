@@ -11,8 +11,122 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
+// 🥷 닌자, 🧞 지니, 🧟 좀비, 🧑‍🚀 우주비행사, 🐇 달토끼, 🧙‍♂️ 간달프, 🧛 드라큘라, 🦈 아기상어, ⛄ 눈사람, 🦅 아기독수리, 🦔 소닉, 🦑 오징어, 🧜‍♀️ 에리얼, 🧚‍♀️ 팅커벨, 🦸‍♂️ 슈퍼맨, 🦹‍♂️ 배트맨, 🗡️ 전사, 🌝 토마스, 🚖 범블비, 🌞 햇님, 🌛 달님, 🍄 마리오, 🌳 그루트, 🕷️ 스파이더맨, 🐜 앤트맨, ☃️ 올라프, 🧝‍♂️ 레골라스, 🧪 매드 사이언티스트
+
 const CharacterInput = ({ characters, setCharacters }) => {
   const [suggestions, setSuggestions] = useState([
+    {
+      emoji: '🥷',
+      name: '닌자',
+    },
+    {
+      emoji: '🧞',
+      name: '지니',
+    },
+    {
+      emoji: '🧟',
+      name: '좀비',
+    },
+    {
+      emoji: '🧑‍🚀',
+      name: '우주비행사',
+    },
+    {
+      emoji: '🐇',
+      name: '달토끼',
+    },
+    {
+      emoji: '🧙‍♂️',
+      name: '간달프',
+    },
+    {
+      emoji: '🧛',
+      name: '드라큘라',
+    },
+    {
+      emoji: '🦈',
+      name: '아기상어',
+    },
+    {
+      emoji: '⛄',
+      name: '눈사람',
+    },
+    {
+      emoji: '🦅',
+      name: '아기독수리',
+    },
+    {
+      emoji: '🦔',
+      name: '소닉',
+    },
+    {
+      emoji: '🦑',
+      name: '오징어',
+    },
+    {
+      emoji: '🧜‍♀️',
+      name: '에리얼',
+    },
+    {
+      emoji: '🧚‍♀️',
+      name: '팅커벨',
+    },
+    {
+      emoji: '🦸‍♂️',
+      name: '슈퍼맨',
+    },
+    {
+      emoji: '🦹‍♂️',
+      name: '배트맨',
+    },
+    {
+      emoji: '🗡️',
+      name: '전사',
+    },
+    {
+      emoji: '🌝',
+      name: '토마스',
+    },
+    {
+      emoji: '🚖',
+      name: '범블비',
+    },
+    {
+      emoji: '🌞',
+      name: '햇님',
+    },
+    {
+      emoji: '🌛',
+      name: '달님',
+    },
+    {
+      emoji: '🍄',
+      name: '마리오',
+    },
+    {
+      emoji: '🌳',
+      name: '그루트',
+    },
+    {
+      emoji: '🕷️',
+      name: '스파이더맨',
+    },
+    {
+      emoji: '🐜',
+      name: '앤트맨',
+    },
+    {
+      emoji: '☃️',
+      name: '올라프',
+    },
+    {
+      emoji: '🧝‍♂️',
+      name: '레골라스',
+    },
+    {
+      emoji: '🧪',
+      name: '매드 사이언티스트',
+    },
     {
       emoji: '⚽️',
       name: '네이마르',
