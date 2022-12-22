@@ -4,10 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 
 import Landing from './pages/Landing';
 import Login from './pages/Login';
-import CollectInput from './pages/CollectInput';
 import Home from './pages/Home';
 import SignUpPolicy from './pages/SignUpPolicy';
 import StoryView from './pages/StoryView';
+import StoryForm from './pages/StoryForm';
 import SignUpName from './pages/SignUpName';
 import paperBackground from '../src/assets/SmoothNotebookPaper_exposed3.png';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -42,7 +42,7 @@ function App() {
               <Route path="/signup/policy" element={<SignUpPolicy />} />
               <Route path="/signup/user" element={<SignUpName />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/story/new" element={<CollectInput />} />
+              <Route path="/story/new" element={<StoryForm />} />
               <Route path="/story/:story_id" element={<StoryView />} />
             </Routes>
           </Box>

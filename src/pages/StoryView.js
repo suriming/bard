@@ -12,7 +12,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
-  others,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
