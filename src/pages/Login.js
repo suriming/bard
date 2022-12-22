@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Link, Spacer, Text } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
 import ViolinIcon from '../assets/violin.png';
@@ -7,27 +7,24 @@ import { googleSignIn } from '../apis/auth';
 
 function Login() {
   const navigate = useNavigate();
-  
+
   const onSuccess = async res => {
     try {
       const response = await googleSignIn(res);
-      if (response.status === 201) navigate('/collectinput');
-      else navigate('/signup');
+      console.log(response);
+
+      if (response.status === 200) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        navigate('/signup/policy');
+      } else if (response.status === 201) {
+        navigate('/home');
+      }
     } catch (e) {
       console.log(e);
       alert(e);
     }
   };
-  
-  const onClickSignUp = () => {
-    navigate('/signuppolicy');
-  };
-  const onTmpClick = () => {
-    navigate('/collectinput');
-  };
-  const onTmpClick2 = () => {
-    navigate('/home');
-  };
+
   return (
     <>
       <Flex
@@ -48,20 +45,10 @@ function Login() {
         >
           <Text fontSize="3xl">Login to Bard</Text>
           <Image boxSize="80px" src={ViolinIcon} />
-          <GoogleLogin onSuccess={onSuccess} onError={res => console.log(res)} />
-          <Text>
-            New to BARD?&nbsp;
-            <Link onClick={onClickSignUp} color="yellow.500">
-              Join us with google account
-            </Link>
-          </Text>
-          <Button onClick={onTmpClick2}>tmp button to home</Button>
-          <a
-            href="https://www.flaticon.com/free-icons/violin"
-            title="violin icons"
-          >
-            Violin icons created by Freepik - Flaticon
-          </a>
+          <GoogleLogin
+            onSuccess={onSuccess}
+            onError={res => console.log(res)}
+          />
         </Flex>
       </Flex>
     </>
