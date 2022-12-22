@@ -22,7 +22,7 @@ export const getStoryById = async story_id => {
 
 export const updateStoryTitle = async (story_id, title) => {
   try {
-    const res = await axiosInstance.put(`/stories/${story_id}/title`, {
+    const res = await axiosInstance.patch(`/stories/${story_id}/title`, {
       title: title,
     });
     return res;

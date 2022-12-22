@@ -68,6 +68,7 @@ const PhotoInputItem = forwardRef(
             left="0px"
             isolation="isolate"
             borderBottomLeftRadius="5px"
+            pointerEvents="none"
           >
             <Text
               size="3xs"

@@ -44,7 +44,12 @@ function Home() {
               Your Stories
             </Text>
           </Flex>
-          <Flex flexDirection="column" align="flex-start" gap="16px">
+          <Flex
+            flexDirection="column"
+            align="flex-start"
+            gap="16px"
+            minHeight="100vh"
+          >
             <Text fontWeight="semibold">Recent Stories</Text>
             {stories.length === 0 && (
               <Text fontWeight="semibold" color="gray.500">
@@ -52,15 +57,12 @@ function Home() {
               </Text>
             )}
             {stories.map(item => (
-              <StoryPreview key={item.ID} data={item} />
+              <StoryPreview
+                key={item.ID}
+                data={item}
+                onClick={() => navigate(`/story/${item.ID}`)}
+              />
             ))}
-            {/* <Button
-              onClick={() => {
-                healthCheck();
-              }}
-            >
-              health check
-            </Button> */}
           </Flex>
           <BottomButton
             title="스토리 만들기"

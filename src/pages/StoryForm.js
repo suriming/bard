@@ -42,6 +42,9 @@ function StoryForm() {
 
     if (res.status === 201) {
       setCreatedStoryId(res.data.story_id);
+    } else {
+      alert('스토리 생성에 실패했습니다.');
+      setIsLoading(false);
     }
   };
 

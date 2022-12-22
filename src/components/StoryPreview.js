@@ -2,7 +2,7 @@ import { Img } from '@chakra-ui/image';
 import { Flex, Text } from '@chakra-ui/layout';
 import moment from 'moment';
 
-const StoryPreview = data => {
+const StoryPreview = ({ data, onClick }) => {
   return (
     <Flex
       flexDirection="row"
@@ -17,6 +17,8 @@ const StoryPreview = data => {
       boxShadow="lg"
       borderRadius="5px"
       alignSelf="stretch"
+      cursor="pointer"
+      onClick={onClick}
     >
       <Flex
         flexDirection="column"
@@ -25,7 +27,9 @@ const StoryPreview = data => {
         w="calc(100vw - 48px - 90px)"
         maxW="calc(768px - 48p - 90px)"
       >
-        <Text fontWeight="bold">{data.title}</Text>
+        <Text fontWeight="bold">
+          {data.title ? data.title : `Generated Story #${data.ID}`}
+        </Text>
         <Text fontSize="sm" color="gray.500">
           {moment(data.createdAt).format('YYYY.MM.DD')}
         </Text>

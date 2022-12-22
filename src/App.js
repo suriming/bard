@@ -43,7 +43,7 @@ function App() {
               <Route path="/signup/user" element={<SignUpName />} />
               <Route path="/home" element={<Home />} />
               <Route path="/story/new" element={<StoryForm />} />
-              <Route path="/story/:story_id" element={<StoryView />} />
+              <Route path="/story/:storyId" element={<StoryView />} />
             </Routes>
           </Box>
         </Box>
