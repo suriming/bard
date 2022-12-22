@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 
 function Header({ title, isBack }) {
@@ -22,13 +22,15 @@ function Header({ title, isBack }) {
       {isBack && (
         <ChevronLeftIcon
           position="absolute"
-          left="calc(50% - 24px - 152.5px)"
+          left="16px"
           h="24px"
           w="24px"
           onClick={onGoBack}
         />
       )}
-      <Text fontSize="md">{title}</Text>
+      <Text fontSize="md" fontWeight="bold">
+        {title}
+      </Text>
     </Flex>
   );
 }

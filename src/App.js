@@ -40,7 +40,7 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup/policy" element={<SignUpPolicy />} />
-              <Route path="/signup/name" element={<SignUpName />} />
+              <Route path="/signup/user" element={<SignUpName />} />
               <Route path="/home" element={<Home />} />
               <Route path="/story/new" element={<CollectInput />} />
               <Route path="/story/:story_id" element={<StoryView />} />

@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 
-function BottomButton({ title, onClick }) {
+function BottomButton({ title, ...props }) {
   return (
     <Button
       colorScheme="yellow"
@@ -10,8 +10,8 @@ function BottomButton({ title, onClick }) {
       position="fixed"
       border="0.7px solid"
       borderRadius="6px"
-      onClick={onClick}
       boxShadow="0px 2px 2px rgba(0, 0, 0, 0.25)"
+      {...props}
     >
       {title}
     </Button>
