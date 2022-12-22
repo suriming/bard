@@ -1,9 +1,34 @@
-import { Button, Flex, Image, Img, others, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Img,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  others,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
-import BasicIllust from '../assets/illust.png';
+import MoonStarsRocketImg from '../assets/MoonStarsRocket.png';
+import { ArrowRightIcon } from '@chakra-ui/icons';
+import MakingStoryLottieData from '../assets/MakingStoryLottie.json';
+import Lottie from 'react-lottie';
 
 function StoryView() {
+  //lottie control
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isStoryMakingDone, setIsStoryMakingDone] = useState(false);
+  // const isDone =
+
   const mock = {
     story: {
       ID: 4,
@@ -29,26 +54,30 @@ function StoryView() {
   };
   const sentenceRefs = useRef([]);
   const [sentences, setSentences] = useState([
-    '예림이는 자신의 방 안에 서 있었어요.',
-    '그녀는 렌즈와 이어폰을 착용하고 손에 들고 있는 책에 몰두하고 있었어요.',
-    '그 방 안에는 수림이가 앉아있는 나무 의자 위에 백 개의 백 손가락 없이 다니는 작은 흰 개가 있었어요.',
-    '예림이는 수림이를 보고 웃어댔어요.',
-    '그녀는 그를 불렀고, 그가 바로 뛰어왔어요.',
-    '예림이는 수림이의 꼬리를 꼭 잡고 그를 안아주며 애교를 건넸어요.',
-    '그 뒤 예림이는 영주랑 함께 주방에 갔어요.',
-    '거기서 저녁 식사를 하기 위해 목욕한 테이블과 음료와 유리가 놓여있 었어요.',
-    '영주는 예림이를 보고 웃었어요.',
-    '"어제 수림이가 너무 귀여웠지?"',
-    '그녀가 물었어요.',
-    '"그래, 너무 귀여웠어요."',
-    '예림이는 웃으며 대답했어요.',
-    '그들은 모두 그녀가 수림이랑 함께 놀면서 지냈던 일을 얘기하며 즐거운 시간을 보냈어요.',
-    '밤이 되자 모두 그만 먹고 갔어요.',
-    '예림이는 수림이를 불러서 주방으로 갔어요.',
-    '그 곳에서 예림이와 수림이는 다시 한 번 놀아보려고 하는데, 영주는 예림이를 보고 웃었어요.',
-    '그녀는 그 모습이 아주 귀여웠기 때문이었어요.',
+    // '예림이는 자신의 방 안에 서 있었어요.',
+    // '그녀는 렌즈와 이어폰을 착용하고 손에 들고 있는 책에 몰두하고 있었어요.',
+    // '그 방 안에는 수림이가 앉아있는 나무 의자 위에 백 개의 백 손가락 없이 다니는 작은 흰 개가 있었어요.',
+    // '예림이는 수림이를 보고 웃어댔어요.',
+    // '그녀는 그를 불렀고, 그가 바로 뛰어왔어요.',
+    // '예림이는 수림이의 꼬리를 꼭 잡고 그를 안아주며 애교를 건넸어요.',
+    // '그 뒤 예림이는 영주랑 함께 주방에 갔어요.',
+    // '거기서 저녁 식사를 하기 위해 목욕한 테이블과 음료와 유리가 놓여있 었어요.',
+    // '영주는 예림이를 보고 웃었어요.',
+    // '"어제 수림이가 너무 귀여웠지?"',
+    // '그녀가 물었어요.',
+    // '"그래, 너무 귀여웠어요."',
+    // '예림이는 웃으며 대답했어요.',
+    // '그들은 모두 그녀가 수림이랑 함께 놀면서 지냈던 일을 얘기하며 즐거운 시간을 보냈어요.',
+    // '밤이 되자 모두 그만 먹고 갔어요.',
+    // '예림이는 수림이를 불러서 주방으로 갔어요.',
+    // '그 곳에서 예림이와 수림이는 다시 한 번 놀아보려고 하는데, 영주는 예림이를 보고 웃었어요.',
+    // '그녀는 그 모습이 아주 귀여웠기 때문이었어요.',
   ]);
   const [imageoutput, setImageoutput] = useState('');
+  const [title, setTitle] = useState('');
+  const handleTitle = e => setTitle(e.target.value);
+  const isTitleNone = title === '';
+
   const appearSentencesOnScroll = () => {
     sentenceRefs &&
       sentenceRefs.current.forEach(l => {
@@ -65,13 +94,14 @@ function StoryView() {
       });
   };
 
-  // const regex = /(".*?")\s|(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
   useEffect(() => {
     setSentences(
       mock.story.body
+        // const regex = /(".*?")\s|(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/; //완벽ㅎ지만 ios 안되는거
         // .replace(/\n/g, ' ')
-        .split(/(".*?")\s|(\.|\?)\s/)
-        // .split(/(".*?")\s|\.\s|\?\s/)
+        // .split(/(".*?")\s|(\.|\?)\s/)
+        // .split(/(".*?")\s|\.\s|\?\s/) // 온점이 split 되어서 따로 어레이에 들어감.
+        .split(/'(".*?")\s|\.\s|\?\s/) //이게 ios에서 되면서 + 온점은 걍 아예 없이 출력.
         .filter(Boolean)
     );
     setImageoutput(mock.story.image_url);
@@ -88,14 +118,7 @@ function StoryView() {
 
   return (
     <>
-      <Flex
-        w="100%"
-        flexDirection="column"
-        // p="0px"
-        // flexGrow="1"
-        // flexShrink="1"
-        // overflow="auto"
-      >
+      <Flex w="100%" flexDirection="column">
         <Header title="Read Story" isBack />
         <Flex
           flexDirection="column"
@@ -103,10 +126,13 @@ function StoryView() {
           p="40px 24px 10px"
           margin="0 auto"
           padding="2rem"
-          gap="24px"
+          gap="42px"
           overflowWrap="break-word"
         >
-          <Img src={BasicIllust} />
+          <Text textAlign="center" fontSize="6xl" fontFamily="Rochester">
+            BARD
+          </Text>
+          <Img w="90%" src={MoonStarsRocketImg} />
           <Text>Scroll down slowly....</Text>
           {sentences.map((item, index) => (
             <Text
@@ -121,14 +147,71 @@ function StoryView() {
               {item}
             </Text>
           ))}
-          {/* <Image src={imageoutput} /> */}
-          <Image
-            src={
-              'https://www.notion.so/an7ares/1216_Image-Generation-Experiments-abc13deeadab48d0a0b476b2ac258414#2cc69a3cd0b34c6ea2ef46e9e66527ec'
-            }
-          />
-          <Button>저장하기</Button>
+          <Image src={mock.story.image_url} />
+          <Flex
+            flexDirection="column"
+            align="flex-start"
+            p="12px"
+            w="100%"
+            minH="80px"
+            bgColor="#FCF6E2"
+            borderRadius="5px"
+          >
+            {/* <Text>Enter your title:</Text> */}
+            <FormControl isRequired>
+              <FormLabel>Enter your title:</FormLabel>
+              <Input
+                borderColor="yellow.800"
+                variant="flushed"
+                placeholder="제목을 입력하세요"
+              />
+            </FormControl>
+          </Flex>
+          <Button
+            colorScheme="yellow"
+            w="100%"
+            gap="8px"
+            border="0.7px solid"
+            borderRadius="6px"
+            onClick={onOpen}
+          >
+            <Text>저장하기</Text>
+            <ArrowRightIcon boxSize={3} />
+          </Button>
         </Flex>
+        <Modal
+          // isCentered
+          closeOnOverlayClick={false}
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalBody>
+              <Lottie
+                options={{
+                  loop: true,
+                  autoplay: true,
+                  animationData: MakingStoryLottieData,
+                }}
+              />
+              <ModalFooter>
+                {isStoryMakingDone ? (
+                  <Flex>
+                    <Text>스토리 생성중...</Text>
+                    <Button>취소</Button>
+                  </Flex>
+                ) : (
+                  <Flex></Flex>
+                )}
+                <Flex>
+                  <Text>스토리 생성 완료!</Text>
+                </Flex>
+              </ModalFooter>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Flex>
     </>
   );

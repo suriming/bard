@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
 import bugSvg from '../assets/bug.svg';
 import flowersDividerSvg from '../assets/flowersDivider.svg';
-import tmpImg1 from '../assets/illust.png';
+import tmpImg1 from '../assets/MoonStarsRocket.png';
 
 function Landing() {
   const navigate = useNavigate();
