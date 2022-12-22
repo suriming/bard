@@ -11,30 +11,30 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-const Suggestions = [
-  {
-    emoji: '⚽️',
-    name: '네이마르',
-  },
-  {
-    emoji: '🎄',
-    name: '산타',
-  },
-  {
-    emoji: '🦌',
-    name: '루돌프',
-  },
-  {
-    emoji: '🐶',
-    name: '강아지',
-  },
-  {
-    emoji: '😼',
-    name: '고양이',
-  },
-];
-
 const CharacterInput = ({ characters, setCharacters }) => {
+  const [suggestions, setSuggestions] = useState([
+    {
+      emoji: '⚽️',
+      name: '네이마르',
+    },
+    {
+      emoji: '🎄',
+      name: '산타',
+    },
+    {
+      emoji: '🦌',
+      name: '루돌프',
+    },
+    {
+      emoji: '🐶',
+      name: '강아지',
+    },
+    {
+      emoji: '😼',
+      name: '고양이',
+    },
+  ]);
+
   const [name, setName] = useState('');
 
   const onNameSubmit = () => {
@@ -61,13 +61,26 @@ const CharacterInput = ({ characters, setCharacters }) => {
     setCharacters(prev => prev.filter(item => item !== name));
   };
 
+  const shuffleSuggestions = () => {
+    console.log(suggestions);
+    const arr = Array.from(suggestions);
+    for (let idx = arr.length - 1; idx > 0; idx--) {
+      const randInt = Math.floor(Math.random() * (idx + 1));
+      const temporary = arr[idx];
+      arr[idx] = arr[randInt];
+      arr[randInt] = temporary;
+    }
+    console.log(arr);
+    setSuggestions(arr);
+  };
+
   return (
     <Flex flexDirection="column" gap="20px">
       <Flex flexDirection="column" align="flex-start" gap="5px">
         <Flex gap="5px">
           <Text fontSize="sm">* BARD의 캐릭터 제안</Text>
-          <Button size="xs">
-            <RepeatIcon color />
+          <Button colorScheme="yellow" size="xs" onClick={shuffleSuggestions}>
+            <RepeatIcon />
           </Button>
         </Flex>
         <Flex
@@ -80,7 +93,7 @@ const CharacterInput = ({ characters, setCharacters }) => {
           gap="4px"
           overflow="auto"
         >
-          {Suggestions.map((item, index) => (
+          {suggestions.slice(0, 3).map((item, index) => (
             <Button
               key={index}
               bgColor="#FDFAEF"
