@@ -65,12 +65,12 @@ function StoryView() {
       });
   };
 
-  const regex = /(".*?")\s|(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
+  // const regex = /(".*?")\s|(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/;
   useEffect(() => {
     setSentences(
       mock.story.body
         // .replace(/\n/g, ' ')
-        .split(/(".*?")\s|(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/)
+        .split(/(".*?")\s|(?<=\.|\?)\s/)
         .filter(Boolean)
     );
     setImageoutput(mock.story.image_url);
