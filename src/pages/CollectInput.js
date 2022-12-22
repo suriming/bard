@@ -1,4 +1,4 @@
-import { AddIcon, CheckIcon } from '@chakra-ui/icons';
+import { AddIcon, CheckIcon, RepeatIcon } from '@chakra-ui/icons';
 import {
   Box,
   Text,
@@ -27,24 +27,32 @@ function CollectInput() {
   const [value, setValue] = useState('');
   const [values, setValues] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const mock = [
+  const suggestCharacters = [
     {
-      emoji: '네이마르와 영주 1편',
-      name: '2022-05-30T09:25:59',
+      emoji: '⚽️',
+      name: '네이마르',
     },
     {
-      title: '네이마르와 영주 2편',
-      createdAt: '2022-11-30T09:25:59',
+      emoji: '🎄',
+      name: '산타',
+    },
+    {
+      emoji: '🦌',
+      name: '루돌프',
     },
   ];
+
+  const onClickSuggestedCharacter = name => {
+    setValues([...values, name]);
+  };
 
   const handleChange = event => {
     setValue(event.target.value);
   };
 
   const onCheck = e => {
-    setValue('');
     setValues([...values, value]);
+    setValue('');
   };
 
   const { register, control, handleSubmit, reset, watch } = useForm({
@@ -155,8 +163,8 @@ function CollectInput() {
             maxW="calc(768px - 48px)"
           >
             <Flex flexDirection="column" gap="5px">
-              <Text>이미지 업로드</Text>
-              <Text color="red.500" fontSize="xs">
+              <Text fontWeight="bold">이미지 업로드</Text>
+              <Text color="gray.600" fontSize="xs">
                 최소 3장에서 최대 5장의 이미지를 업로드 해주세요.
               </Text>
               <Flex
@@ -177,19 +185,14 @@ function CollectInput() {
                 <PhotoInputList imageURLs={imageURLs} />
               </Flex>
             </Flex>
-            {/* <Input
-                type="file"
-                h="100%"
-                w="100%"
-                multiple
-                accept="image/*"
-                onChange={onChangeImages}
-              />
-              <PhotoInputList imageURLs={imageURLs} /> */}
-            {/* </Box> */}
             <Flex flexDirection="column" gap="20px">
               <Flex flexDirection="column" align="flex-start" gap="5px">
-                <Text>BARD의 캐릭터 제안</Text>
+                <Flex gap="5px">
+                  <Text fontSize="sm">* BARD의 캐릭터 제안</Text>
+                  <Button size="xs">
+                    <RepeatIcon color />
+                  </Button>
+                </Flex>
                 <Flex
                   minH="48px"
                   w="calc(100vw - 48px)"
@@ -197,10 +200,28 @@ function CollectInput() {
                   border="0.7px solid"
                   borderRadius="5px"
                 >
-                  <Flex></Flex>
+                  <Flex flexDirection="row" align="center" p="8px 0px">
+                    <Flex
+                      flexDirection="row"
+                      align="flex-start"
+                      p="0px 10px"
+                      gap="4px"
+                    >
+                      {suggestCharacters.map((item, index) => (
+                        <Button
+                          key={index}
+                          bgColor="#FDFAEF"
+                          onClick={e => onClickSuggestedCharacter(item.name)}
+                        >
+                          <Box>{item.emoji}</Box>
+                          <Box>{item.name}</Box>
+                        </Button>
+                      ))}
+                    </Flex>
+                  </Flex>
                 </Flex>
               </Flex>
-              <Text>캐릭터 입력</Text>
+              <Text fontWeight="bold">캐릭터 입력</Text>
               <Flex flexDirection="row" gap="8px">
                 <Input
                   value={value}
