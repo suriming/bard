@@ -1,12 +1,17 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Text, Flex, Button } from '@chakra-ui/react';
+import { Text, Flex, Button, Img, Box } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ReactSortable } from 'react-sortablejs';
 import { uploadFiles } from '../apis/file';
 import PhotoInputItem from './PhotoInputItem';
 
 const ImageInput = ({ imageInfos, setImageInfos }) => {
   const inputRef = useRef();
+
+  useEffect(() => {
+    console.log(imageInfos);
+  }, [imageInfos]);
 
   const uploadImages = async images => {
     const res = await uploadFiles(images.map(image => image.file));
@@ -69,17 +74,11 @@ const ImageInput = ({ imageInfos, setImageInfos }) => {
         multiple
         hidden
       />
-      <Flex
-        flexDirection="row"
-        align="flex-start"
-        p="8px 0px 8px"
-        gap="8px"
-        width="100%"
-        overflowX="scroll"
-      >
+      <Flex gap="8px" width={'100%'} align="center">
         <Button
           h="80px"
           w="80px"
+          flexShrink={0}
           colorScheme="yellow"
           onClick={() => {
             inputRef.current.click();
@@ -88,17 +87,34 @@ const ImageInput = ({ imageInfos, setImageInfos }) => {
         >
           <AddIcon />
         </Button>
-        {imageInfos.map((imageInfo, index) => (
-          <PhotoInputItem
-            index={index}
-            key={imageInfo.uuid}
-            src={imageInfo.url}
-            isUploading={imageInfo.isUploading}
-            onDelete={() => {
-              onImageDelete(imageInfo.uuid);
-            }}
-          />
-        ))}
+        <ReactSortable
+          list={imageInfos}
+          setList={setImageInfos}
+          animation={200}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            padding: '8px 0px 8px',
+            gap: '8px',
+            width: '100%',
+            overflowX: 'scroll',
+          }}
+        >
+          {imageInfos.map((imageInfo, index) => {
+            return (
+              <PhotoInputItem
+                index={index}
+                key={imageInfo.uuid}
+                src={imageInfo.url}
+                isUploading={imageInfo.isUploading}
+                onDelete={() => {
+                  onImageDelete(imageInfo.uuid);
+                }}
+              />
+            );
+          })}
+        </ReactSortable>
       </Flex>
     </Flex>
   );
