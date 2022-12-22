@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
+import CharacterInput from '../components/CharacterInput';
 import Header from '../components/Header';
 import PhotoInputList from '../components/PhotoInputList';
 
@@ -27,24 +28,6 @@ function CollectInput() {
   const [value, setValue] = useState('');
   const [values, setValues] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const suggestCharacters = [
-    {
-      emoji: '⚽️',
-      name: '네이마르',
-    },
-    {
-      emoji: '🎄',
-      name: '산타',
-    },
-    {
-      emoji: '🦌',
-      name: '루돌프',
-    },
-    {
-      emoji: '🐶',
-      name: '강아지',
-    },
-  ];
 
   const onClickSuggestedCharacter = name => {
     setValues([...values, name]);
@@ -57,21 +40,6 @@ function CollectInput() {
   const onCheck = e => {
     setValues([...values, value]);
     setValue('');
-  };
-
-  const { register, control, handleSubmit, reset, watch } = useForm({
-    defaultValues: {
-      cTag: [{ content: 'Bill' }],
-    },
-  });
-  const { fields, append, prepend, remove, swap, move, insert, replace } =
-    useFieldArray({
-      control, // control props comes from useForm (optional: if you are using FormContext)
-      name: 'cTag', // unique name for your Field Array
-    });
-
-  const onSubmit = async data => {
-    console.log(data);
   };
 
   useEffect(() => {
@@ -89,19 +57,6 @@ function CollectInput() {
 
   const [cusTags, setCusTags] = useState(['띠용', '뭐임']);
   const [tagItem, setTagItem] = useState('댇체');
-
-  const addTag = () => {
-    console.log(tagItem);
-    (async () => {
-      setCusTags([...cusTags, tagItem]);
-    })().then(() => {
-      setTagItem('');
-      console.log(cusTags);
-    });
-    // setTags([...tags, tagItem]);
-    setTagItem('');
-    console.log(cusTags);
-  };
 
   const removeTag = idx => {
     // setCusTags(cusTags.filter((item, i) => i !== idx));
@@ -189,97 +144,7 @@ function CollectInput() {
                 <PhotoInputList imageURLs={imageURLs} />
               </Flex>
             </Flex>
-            <Flex flexDirection="column" gap="20px">
-              <Flex flexDirection="column" align="flex-start" gap="5px">
-                <Flex gap="5px">
-                  <Text fontSize="sm">* BARD의 캐릭터 제안</Text>
-                  <Button size="xs">
-                    <RepeatIcon color />
-                  </Button>
-                </Flex>
-                <Flex
-                  minH="48px"
-                  w="calc(100vw - 48px)"
-                  maxW="calc(768px - 48px)"
-                  border="0.7px solid"
-                  borderRadius="5px"
-                >
-                  <Flex flexDirection="row" align="center" p="8px 0px">
-                    <Flex
-                      flexDirection="row"
-                      align="flex-start"
-                      p="0px 10px"
-                      gap="4px"
-                    >
-                      {suggestCharacters.map((item, index) => (
-                        <Button
-                          key={index}
-                          bgColor="#FDFAEF"
-                          onClick={e => onClickSuggestedCharacter(item.name)}
-                        >
-                          <Box>{item.emoji}</Box>
-                          <Box>{item.name}</Box>
-                        </Button>
-                      ))}
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-              <Text fontWeight="bold">캐릭터 입력</Text>
-              <Flex flexDirection="row" gap="8px">
-                <Input
-                  value={value}
-                  onChange={handleChange}
-                  placeholder="캐릭터를 입력하세요. ex: 서혁준"
-                />
-                <Button colorScheme="yellow" onClick={onCheck}>
-                  <CheckIcon />
-                </Button>
-              </Flex>
-              <Box
-                w="calc(100vw - 48px)"
-                maxW="calc(768px - 48px)"
-                minH="100px"
-                background="gray.100"
-                p="10px"
-              >
-                {values.map((item, index) => (
-                  <Tag
-                    key={index}
-                    colorScheme="blackAlpha"
-                    variant="subtle"
-                    m="0.2rem"
-                  >
-                    <TagLabel>{item}</TagLabel>
-                    <TagCloseButton onClick={() => removeTag(index)} />
-                  </Tag>
-                ))}
-              </Box>
-              {/* <form onSubmit={handleSubmit(onSubmit)}>
-                <ul>
-                  {fields.map((field, index) => {
-                    return (
-                      <Tag key={field.id}>
-                        <Input
-                          {...register(`cTag.${index}.content`, {
-                            required: true,
-                          })}
-                        />
-                        <TagCloseButton onClick={() => remove(index)} />
-                        <Controller
-                          render={({ field }) => <input {...field} />}
-                          name={`cTag.${index}.content`}
-                          control={control}
-                        />
-                      </Tag>
-                    );
-                  })}
-                  <Button onClick={() => append({ content: '' })}>
-                    append
-                  </Button>
-                </ul>
-              </form> */}
-            </Flex>
+            <CharacterInput />
           </Flex>
           <BottomButton title="입력 완료" onClick={onComplete} />
         </Flex>
