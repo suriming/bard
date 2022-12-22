@@ -1,10 +1,10 @@
-import axios from 'axios';
-
-const API_URL = `process.env.REACT_APP_API_URL/stories`;
+import axiosInstance from './instance';
 
 export const getStories = async () => {
   try {
-    const res = await axios.get(`${API_URL}`);
+    const res = await axiosInstance.get(`/stories`, {
+      withCredentials: true,
+    });
     return res;
   } catch (e) {
     console.log(e);
@@ -13,7 +13,7 @@ export const getStories = async () => {
 
 export const getStoryById = async story_id => {
   try {
-    const res = await axios.get(`${API_URL}/${story_id}`);
+    const res = await axiosInstance.get(`/stories/${story_id}`);
     return res;
   } catch (e) {
     console.log(e);
@@ -22,7 +22,7 @@ export const getStoryById = async story_id => {
 
 export const updateStoryTitle = async (story_id, title) => {
   try {
-    const res = await axios.put(`${API_URL}/${story_id}/title`, {
+    const res = await axiosInstance.put(`/stories/${story_id}/title`, {
       title: title,
     });
     return res;
@@ -33,7 +33,7 @@ export const updateStoryTitle = async (story_id, title) => {
 
 export const createStory = async payload => {
   try {
-    const res = await axios.post(`${API_URL}`, {
+    const res = await axiosInstance.post(`/stories`, {
       characters: payload.characters,
       image_ids: payload.image_ids,
     });

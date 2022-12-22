@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from './instance';
 
 export const uploadFiles = async files => {
   try {
-    const res = await axios.post(
-      `${API_URL}/files`,
+    const res = await axiosInstance.post(
+      `/files`,
       {
         files,
       },

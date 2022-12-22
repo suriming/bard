@@ -1,11 +1,9 @@
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from './instance';
 
 export const googleSignIn = async ({ clientId, credential }) => {
   try {
-    const res = await axios.post(
-      `${API_URL}/auth/google`,
+    const res = await axiosInstance.post(
+      `/auth/google`,
       {
         clientId,
         credential,
@@ -23,9 +21,7 @@ export const googleSignIn = async ({ clientId, credential }) => {
 
 export const logout = async () => {
   try {
-    const res = await axios.get(`${API_URL}/auth/logout`, {
-      withCredentials: true,
-    });
+    const res = await axiosInstance.get(`/auth/logout`);
     return res;
   } catch (e) {
     console.log(e);
@@ -34,9 +30,7 @@ export const logout = async () => {
 
 export const getSession = async () => {
   try {
-    const res = await axios.get(`${API_URL}/auth/user`, {
-      withCredentials: true,
-    });
+    const res = await axiosInstance.get(`/auth/user`);
 
     return res;
   } catch (e) {
