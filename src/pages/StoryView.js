@@ -21,8 +21,19 @@ import MoonStarsRocketImg from '../assets/MoonStarsRocket.png';
 import { ArrowRightIcon } from '@chakra-ui/icons';
 import MakingStoryLottieData from '../assets/MakingStoryLottie.json';
 import Lottie from 'react-lottie';
+import flowersDividerSvg from '../assets/flowersDivider.svg';
 
 function StoryView() {
+  // const MyElement = styled.div`
+  //   &.show {
+  //     opacity: 1;
+  //     filter
+  //   }`;
+  // .hidden {
+  //   opacity: 0;
+
+  // }
+
   //lottie control
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isStoryMakingDone, setIsStoryMakingDone] = useState(false);
@@ -77,20 +88,40 @@ function StoryView() {
   const handleTitle = e => setTitle(e.target.value);
   const isTitleNone = title === '';
 
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      console.log(entry);
+      console.log(entry.target.classList);
+      if (entry.isIntersecting) {
+        // entry.target.classList.add('show');
+        entry.target.style.opacity = 1;
+        entry.target.style.filter = 'blur(0)';
+        entry.target.style.transform = 'translateX(0)';
+      } else {
+        entry.target.style.filter = 'blur(5px)';
+        entry.target.style.opacity = 0;
+        entry.target.style.transition = 'all 1s';
+        // entry.target.style.transform = 'translateX(-100%)';
+        // entry.target.classList.remove('show');
+      }
+    });
+  });
+
   const appearSentencesOnScroll = () => {
     sentenceRefs &&
-      sentenceRefs.current.forEach(l => {
-        // console.log(l);
-        const p = l.getBoundingClientRect();
-        const pTop = p.top;
-        const pHeight = p.height;
-        const pBottom = p.bottom;
-        const windowHeight = window.innerHeight;
+      // sentenceRefs.current.forEach(l => {
+      //   // console.log(l);
+      //   const p = l.getBoundingClientRect();
+      //   const pTop = p.top;
+      //   const pHeight = p.height;
+      //   const pBottom = p.bottom;
+      //   const windowHeight = window.innerHeight;
 
-        if (pTop < windowHeight / 2 && pBottom > windowHeight / 2) {
-          l.style.opacity = 1;
-        }
-      });
+      //   if (pTop < windowHeight / 2 && pBottom > windowHeight / 2) {
+      //     l.style.opacity = 1;
+      //   }
+      // });
+      sentenceRefs.current.forEach(el => observer.observe(el));
   };
 
   useEffect(() => {
@@ -132,13 +163,19 @@ function StoryView() {
             BARD
           </Text>
           <Img w="90%" src={MoonStarsRocketImg} />
-          <Text>Scroll down slowly....</Text>
+          <Text fontFamily="Aladin" fontSize="22px">
+            Scroll down slowly....
+          </Text>
           {sentences.map((item, index) => (
             <Text
+              fontSize="xl"
               ref={el => el && sentenceRefs.current.push(el)}
               transition="all 0.25s cubic-bezier(0.4, 0, 0.2, 1)"
               opacity="0"
-              marginBottom="5rem"
+              filter="blur(5px)"
+              // transform="translateX(-100%)"
+              transitionDelay="all 1s"
+              marginBottom="3.2rem"
               key={index}
               textAlign="center"
               wordBreak="keep-all"
@@ -146,7 +183,15 @@ function StoryView() {
               {item}
             </Text>
           ))}
+          <Image src={flowersDividerSvg} />
           <Image src={mock.story.image_url} />
+          <Flex flexDirection="column" align="center">
+            <Text fontFamily="Aladin" fontSize="22px">
+              Stories by BARD
+            </Text>
+            <Image transform="scaleY(-1)" src={flowersDividerSvg} />
+          </Flex>
+
           <Flex
             flexDirection="column"
             align="flex-start"
@@ -178,7 +223,7 @@ function StoryView() {
             <ArrowRightIcon boxSize={3} />
           </Button>
         </Flex>
-        <Modal
+        {/* <Modal
           // isCentered
           closeOnOverlayClick={false}
           isOpen={isOpen}
@@ -210,7 +255,7 @@ function StoryView() {
               </ModalFooter>
             </ModalBody>
           </ModalContent>
-        </Modal>
+        </Modal> */}
       </Flex>
     </>
   );
