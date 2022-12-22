@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Box, theme, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, Box, extendTheme } from '@chakra-ui/react';
 import { Route, Routes } from 'react-router-dom';
 
 import Landing from './pages/Landing';
@@ -7,8 +7,6 @@ import Login from './pages/Login';
 import CollectInput from './pages/CollectInput';
 import Home from './pages/Home';
 import SignUpPolicy from './pages/SignUpPolicy';
-import StoryLoading from './pages/StoryLoading';
-import LoadingComplete from './pages/LoadingComplete';
 import StoryView from './pages/StoryView';
 import SignUpName from './pages/SignUpName';
 import paperBackground from '../src/assets/SmoothNotebookPaper_exposed3.png';
@@ -40,14 +38,12 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signuppolicy" element={<SignUpPolicy />} />
-              <Route path="signupname" element={<SignUpName />} />
-              <Route path="home" element={<Home />} />
-              <Route path="collectinput" element={<CollectInput />} />
-              <Route path="storyloading" element={<StoryLoading />} />
-              <Route path="loadingcomplete" element={<LoadingComplete />} />
-              <Route path="storyview" element={<StoryView />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup/policy" element={<SignUpPolicy />} />
+              <Route path="/signup/name" element={<SignUpName />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/story/new" element={<CollectInput />} />
+              <Route path="/story/:story_id" element={<StoryView />} />
             </Routes>
           </Box>
         </Box>

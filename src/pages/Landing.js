@@ -1,14 +1,4 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Img,
-  Text,
-  Tooltip,
-  VStack,
-} from '@chakra-ui/react';
+import { Divider, Flex, Img, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
 import bugSvg from '../assets/bug.svg';

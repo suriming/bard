@@ -4,14 +4,13 @@ import {
   Text,
   Flex,
   Button,
-  Icon,
   Input,
   TagLabel,
   Tag,
   TagCloseButton,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import BottomButton from '../components/BottomButton';
 import Header from '../components/Header';
