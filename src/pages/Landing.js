@@ -4,6 +4,9 @@ import BottomButton from '../components/BottomButton';
 import bugSvg from '../assets/bug.svg';
 import flowersDividerSvg from '../assets/flowersDivider.svg';
 import tmpImg1 from '../assets/MoonStarsRocket.png';
+import landingImg1 from '../assets/AboutFriendship.png';
+import landingImg2 from '../assets/EverlastingMoment.png';
+import { EmailIcon } from '@chakra-ui/icons';
 
 function Landing() {
   const navigate = useNavigate();
@@ -47,17 +50,17 @@ function Landing() {
           maxW="calc(768px - 48px)"
           borderRadius="5px"
         >
-          <Text fontSize="2xl">Sulim And a Cat</Text>
+          <Text fontSize="2xl">About Friendship</Text>
           <Flex
             flexDirection="row"
             justify="center"
             align="center"
             p="0px 0px 4px"
-            gap="10px"
+            gap="20px"
           >
-            <Img w="180px" src={tmpImg1} />
+            <Img w="180px" src={landingImg1} />
             <Text fontSize="sm" textAlign="center">
-              "수림과 고양이는 둘도 없는 친구가 되었습니다"
+              "예림과 영주는 친구들과 경기를 보며 즐거운 시간을 보냈답니다."
             </Text>
           </Flex>
         </Flex>
@@ -71,25 +74,36 @@ function Landing() {
           maxW="calc(768px - 48px)"
           borderRadius="5px"
         >
-          <Text fontSize="2xl">Queen YeongJu And Naymar</Text>
+          <Text fontSize="2xl">Everlasting Moment</Text>
           <Flex
             flexDirection="row"
             justify="center"
             align="center"
             p="0px 0px 4px"
-            gap="10px"
+            gap="20px"
           >
-            <Img w="180px" src={tmpImg1} />
+            <Img w="180px" src={landingImg2} />
             <Text fontSize="sm" textAlign="center">
-              “영주는 맨체스터 유나이티드 왕국의 여왕이었습니다"
+              “수림은 고양이에게 먹을 것을 나눠 주고 둘도 없는 친구가
+              되었습니다."
             </Text>
           </Flex>
         </Flex>
         <BottomButton onClick={onStart} title="Get Started" />
-        <Flex flexDirection="column" align="flex-start" gap="10px">
+        <Flex flexDirection="column" align="center" gap="10px">
           <Divider w="calc(100vw - 48px)" maxW="calc(768px - 48px)" />
-          <Text fontSize="xs">Contact</Text>
-          <Flex></Flex>
+          <Text color="gray.500" fontSize="xs">
+            2022 @ YBigta Team BARD
+          </Text>
+          <Text color="gray.500" fontSize="xs">
+            Contact
+          </Text>
+          <Flex gap="10px">
+            <EmailIcon color="gray.500" />
+            <Text color="gray.500" fontSize="xs">
+              tjguwns5757@gmail.com
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
     </>
